@@ -8,4 +8,7 @@ matplotlib
 seaborn
 fpdf
 langchain_groq
+langchain
+langchain-community
 faiss-cpu
+sentence-transformers

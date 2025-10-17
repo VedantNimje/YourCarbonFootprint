@@ -1,11 +1,13 @@
-# YourCarbonFootprint - AI Agents powered Carbon Accounting Tool
+# YourCarbonFootprint - RAG-Enhanced AI Carbon Accounting Tool
 
 ![Carbon Footprint](https://img.shields.io/badge/Carbon-Footprint-green)
 ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white)
 ![CrewAI](https://img.shields.io/badge/CrewAI-AI%20Agents-blue)
 ![Groq](https://img.shields.io/badge/Groq-LLM-purple)
+![RAG](https://img.shields.io/badge/RAG-Enabled-orange)
+![FAISS](https://img.shields.io/badge/FAISS-Vector%20Store-red)
 
-A lightweight, multilingual carbon accounting and reporting tool for SMEs in Asia, with AI-powered insights and data entry.
+A lightweight, multilingual carbon accounting and reporting tool for SMEs in Asia, powered by **Retrieval-Augmented Generation (RAG)** and specialized AI agents for intelligent, context-aware carbon accounting assistance.
 
 ## 📋 Table of Contents
 
@@ -31,11 +33,12 @@ A lightweight, multilingual carbon accounting and reporting tool for SMEs in Asi
 ### AI Agent Features
 | Agent | Role |
 |-------|------|
-| Data Entry Assistant | Helps users classify emissions, map to scopes, and validate data entries |
+| **RAG Knowledge Base** | Answer questions using retrieval-augmented generation from comprehensive carbon accounting knowledge base |
+| Data Entry Assistant | Helps users classify emissions, map to scopes, and validate data entries (RAG-enhanced) |
 | Report Summary Generator | Converts emission data into human-readable summaries |
-| Carbon Offset Advisor | Suggests verified offset options based on user profile and location |
-| Regulation Radar | Notifies users of upcoming compliance needs |
-| Emission Optimizer | Uses historical data to suggest reductions and savings |
+| Carbon Offset Advisor | Suggests verified offset options based on user profile and location (RAG-enhanced) |
+| Regulation Radar | Notifies users of upcoming compliance needs (RAG-enhanced) |
+| Emission Optimizer | Uses historical data to suggest reductions and savings (RAG-enhanced) |
 
 ## 🏗 Architecture
 
@@ -103,6 +106,17 @@ pip install -r requirements.txt
 GROQ_API_KEY=your_groq_api_key_here
 ```
 
+5. Initialize the RAG system (first time only):
+```bash
+python setup_rag.py
+```
+
+This will:
+- Load knowledge base documents
+- Create embeddings using HuggingFace sentence-transformers
+- Build FAISS vector store for semantic search
+- Run a test query to verify setup
+
 ## ⚙️ Configuration
 
 ### Environment Variables
@@ -113,6 +127,11 @@ GROQ_API_KEY=your_groq_api_key_here
 - Company settings are stored in `data/settings.json`
 - Automatic backups are created for corrupted files with timestamped filenames
 
+### RAG System Storage
+- Knowledge base documents: `knowledge_base/*.txt`
+- FAISS vector store: `knowledge_base/faiss_index/`
+- Embedding model: Downloaded automatically to cache (HuggingFace sentence-transformers)
+
 ## 📊 Usage
 
 ### Running the Application
@@ -122,9 +141,15 @@ streamlit run app.py
 ```
 
 ### Navigation
-- **Dashboard**: View emissions data visualizations and analytics
+- **AI Insights**: Access RAG knowledge base and specialized AI agents
+  - **RAG Knowledge Base**: Ask questions with context-aware answers and source citations
+  - **Data Assistant**: Get help classifying emissions (RAG-enhanced)
+  - **Report Summary**: Generate summaries from emissions data
+  - **Offset Advisor**: Get carbon offset recommendations (RAG-enhanced)
+  - **Regulation Radar**: Check compliance requirements (RAG-enhanced)
+  - **Emission Optimizer**: Get reduction strategies (RAG-enhanced)
 - **Data Entry**: Add new emission entries with enterprise-grade form
-- **AI Insights**: Access specialized AI agents for carbon accounting assistance
+- **Dashboard**: View emissions data visualizations and analytics
 - **Settings**: Configure company information and preferences
 
 ### Data Entry Form
@@ -140,52 +165,95 @@ The enhanced enterprise-grade data entry form includes:
 - Download sample CSV template
 - Export emissions data as CSV or PDF reports
 
-## 🤖 AI Agents
+## 🤖 AI Agents with RAG
 
-YourCarbonFootprint integrates five specialized AI agents using CrewAI and Groq LLM:
+YourCarbonFootprint integrates **Retrieval-Augmented Generation (RAG)** with specialized AI agents using CrewAI and Groq LLM:
 
-1. **Data Entry Assistant**: Helps classify emissions and validate data entries
+### RAG Knowledge Base
+- **Comprehensive Knowledge Base**: 4 curated documents covering GHG Protocol, regulations, reduction strategies, and offset markets
+- **Vector Store**: FAISS-based semantic search with HuggingFace embeddings
+- **Context-Aware Responses**: AI agents augmented with relevant knowledge base context
+- **Direct Query Interface**: Ask questions and get answers with source citations
+
+### AI Agents (RAG-Enhanced)
+1. **Data Entry Assistant**: Helps classify emissions and validate data entries (uses GHG Protocol knowledge)
 2. **Report Summary Generator**: Creates human-readable summaries from emissions data
-3. **Carbon Offset Advisor**: Recommends verified carbon offset options
-4. **Regulation Radar**: Provides updates on compliance requirements
-5. **Emission Optimizer**: Suggests ways to reduce emissions based on historical data
+3. **Carbon Offset Advisor**: Recommends verified carbon offset options (uses offset market knowledge)
+4. **Regulation Radar**: Provides updates on compliance requirements (uses regulation knowledge)
+5. **Emission Optimizer**: Suggests ways to reduce emissions based on historical data (uses reduction strategies knowledge)
 
-### AI Agent Implementation
+### RAG System Usage
 
 ```python
-from crewai import Agent, Task, Crew, Process
-from crewai.llms import LLM
+from rag_system import get_rag_system
 
-# Initialize LLM
-llm = LLM(provider="groq", model="llama3-70b-8192")
+# Initialize RAG system
+rag = get_rag_system()
 
-# Create an agent
-data_entry_assistant = Agent(
-    llm=llm,
-    role="Data Entry Assistant",
-    goal="Help users classify emissions, map to scopes, and validate data entries",
-    backstory="You are an expert in carbon accounting who helps users correctly categorize "
-             "their emissions data and ensure it's properly mapped to the right scope.",
-    allow_delegation=False,
-    verbose=False
-)
+# Load or create vector store
+rag.load_vector_store()
 
-# Create a task
-data_entry_task = Task(
-    description="Analyze the user's emission data and provide guidance on classification",
-    agent=data_entry_assistant
-)
+# Query the knowledge base
+result = rag.query("What are the differences between Scope 1, 2, and 3 emissions?")
+print(result['answer'])
 
-# Create and run a crew
-crew = Crew(
-    agents=[data_entry_assistant],
-    tasks=[data_entry_task],
-    verbose=False,
-    process=Process.sequential
-)
+# View source documents
+for doc in result['source_documents']:
+    print(doc.page_content)
 
-result = crew.kickoff(inputs={"user_query": "How should I categorize my company's electricity usage?"})
+# Get context for AI agents
+context = rag.get_context_for_agent("GHG Protocol emission scopes")
 ```
+
+### AI Agent Implementation with RAG
+
+```python
+from ai_agents import CarbonFootprintAgents
+
+# Initialize agents with RAG enabled (default)
+agents = CarbonFootprintAgents(use_rag=True)
+
+# Run data entry assistant (automatically uses RAG context)
+result = agents.run_data_entry_crew("Diesel fuel used in company vehicles")
+
+# Run regulation check (automatically uses RAG context)
+result = agents.run_regulation_check_crew(
+    location="Jakarta, Indonesia",
+    industry="Manufacturing",
+    export_markets="European Union, Japan"
+)
+```
+
+## 📚 Knowledge Base Content
+
+The RAG system includes comprehensive documentation on:
+
+### 1. GHG Protocol & Emission Scopes (`ghg_protocol_scopes.txt`)
+- Detailed definitions of Scope 1, 2, and 3 emissions
+- Calculation methodologies and emission factors
+- Organizational boundary approaches
+- Reporting requirements and best practices
+
+### 2. Carbon Regulations (`carbon_regulations.txt`)
+- **EU CBAM**: Timeline, covered sectors, requirements, penalties
+- **Japan GX League**: Carbon pricing, trading mechanisms, targets
+- **Indonesia ETS/ETP**: Emissions trading, energy transition programs
+- **Other Major Regulations**: California, UK, China, Korea, New Zealand
+- Compliance best practices and upcoming trends
+
+### 3. Emission Reduction Strategies (`emission_reduction_strategies.txt`)
+- Energy efficiency improvements (lighting, HVAC, industrial processes)
+- Renewable energy adoption (solar, wind, biomass)
+- Transportation optimization (fleet electrification, route optimization)
+- Supply chain optimization and circular economy
+- Sector-specific strategies and implementation roadmaps
+
+### 4. Carbon Offset Markets (`carbon_offset_markets.txt`)
+- Types of carbon markets (compliance vs voluntary)
+- Offset project types and pricing
+- Verification standards (VCS, Gold Standard, CAR, ACR)
+- Regional offset options for Asia-Pacific
+- Best practices for offset purchasing
 
 ## 📁 Data Structure
 

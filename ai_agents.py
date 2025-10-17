@@ -6,6 +6,7 @@ Uses CrewAI to create agents for various tasks.
 import os
 from dotenv import load_dotenv
 from crewai import Agent, Task, Crew, LLM
+from rag_system import get_rag_system
 
 # Load environment variables
 load_dotenv()
@@ -23,9 +24,29 @@ def get_llm():
 
 # Create AI agents
 class CarbonFootprintAgents:
-    def __init__(self):
-        """Initialize the CarbonFootprintAgents class."""
+    def __init__(self, use_rag=True):
+        """Initialize the CarbonFootprintAgents class.
+        
+        Args:
+            use_rag: Whether to use RAG for context augmentation
+        """
         self.llm = get_llm()
+        self.use_rag = use_rag
+        self.rag_system = None
+        
+        if self.use_rag:
+            try:
+                self.rag_system = get_rag_system()
+                # Initialize vector store if not already done
+                try:
+                    self.rag_system.load_vector_store()
+                except:
+                    print("Creating new vector store from knowledge base...")
+                    self.rag_system.create_vector_store()
+            except Exception as e:
+                print(f"Warning: RAG system initialization failed: {e}")
+                self.use_rag = False
+        
         self._create_agents()
     
     def _create_agents(self):
@@ -97,6 +118,14 @@ class CarbonFootprintAgents:
     
     def create_data_entry_task(self, data_description):
         """Create a task for the Data Entry Assistant."""
+        # Get RAG context if available
+        context = ""
+        if self.use_rag and self.rag_system:
+            context = self.rag_system.get_context_for_agent(
+                f"GHG Protocol scopes and emission classification for {data_description}"
+            )
+            context = f"\n\nRelevant Knowledge Base Context:\n{context}\n"
+        
         return Task(
             description=(
                 f"Analyze the following data and help classify it into the appropriate "
@@ -105,6 +134,7 @@ class CarbonFootprintAgents:
                 f"2. Suggest the most appropriate category\n"
                 f"3. Recommend an appropriate emission factor if possible\n"
                 f"4. Validate the data for completeness and accuracy"
+                f"{context}"
             ),
             expected_output="A detailed classification of the emissions data with scope, "
                            "category, and recommended emission factor.",
@@ -129,6 +159,14 @@ class CarbonFootprintAgents:
     
     def create_offset_advice_task(self, emissions_total, location, industry):
         """Create a task for the Carbon Offset Advisor."""
+        # Get RAG context if available
+        context = ""
+        if self.use_rag and self.rag_system:
+            context = self.rag_system.get_context_for_agent(
+                f"Carbon offset options and verification standards for {location} {industry}"
+            )
+            context = f"\n\nRelevant Knowledge Base Context:\n{context}\n"
+        
         return Task(
             description=(
                 f"Recommend carbon offset options for an organization with the following profile:\n"
@@ -139,6 +177,7 @@ class CarbonFootprintAgents:
                 f"2. Provide estimated costs for offsetting their emissions\n"
                 f"3. Explain the benefits and limitations of each option\n"
                 f"4. Recommend a balanced portfolio approach if appropriate"
+                f"{context}"
             ),
             expected_output="A list of recommended carbon offset options with costs, benefits, "
                            "and limitations for each.",
@@ -147,6 +186,14 @@ class CarbonFootprintAgents:
     
     def create_regulation_check_task(self, location, industry, export_markets):
         """Create a task for the Regulation Radar."""
+        # Get RAG context if available
+        context = ""
+        if self.use_rag and self.rag_system:
+            context = self.rag_system.get_context_for_agent(
+                f"Carbon regulations and compliance requirements for {location} {industry} exporting to {export_markets}"
+            )
+            context = f"\n\nRelevant Knowledge Base Context:\n{context}\n"
+        
         return Task(
             description=(
                 f"Analyze the regulatory requirements for an organization with the following profile:\n"
@@ -157,6 +204,7 @@ class CarbonFootprintAgents:
                 f"2. Highlight upcoming regulatory changes in the next 1-2 years\n"
                 f"3. Assess the potential impact of these regulations on the organization\n"
                 f"4. Recommend preparation steps to ensure compliance"
+                f"{context}"
             ),
             expected_output="A comprehensive overview of current and upcoming regulatory "
                            "requirements with recommendations for compliance preparation.",
@@ -165,6 +213,14 @@ class CarbonFootprintAgents:
     
     def create_optimization_task(self, emissions_data):
         """Create a task for the Emission Optimizer."""
+        # Get RAG context if available
+        context = ""
+        if self.use_rag and self.rag_system:
+            context = self.rag_system.get_context_for_agent(
+                f"Emission reduction strategies and best practices for {emissions_data}"
+            )
+            context = f"\n\nRelevant Knowledge Base Context:\n{context}\n"
+        
         return Task(
             description=(
                 f"Analyze the following emissions data and identify opportunities for reduction: "
@@ -173,6 +229,7 @@ class CarbonFootprintAgents:
                 f"2. Suggest practical measures to reduce emissions in each area\n"
                 f"3. Estimate potential emission reductions and cost savings where possible\n"
                 f"4. Prioritize recommendations based on impact and feasibility"
+                f"{context}"
             ),
             expected_output="A prioritized list of emission reduction opportunities with "
                            "estimated impacts and implementation guidance.",

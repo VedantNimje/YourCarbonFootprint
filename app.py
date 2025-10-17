@@ -1182,9 +1182,65 @@ elif st.session_state.active_page == "AI Insights":
         st.session_state.ai_agents = CarbonFootprintAgents()
     
     # Create tabs for different AI insights
-    ai_tabs = st.tabs(["Data Assistant", "Report Summary", "Offset Advisor", "Regulation Radar", "Emission Optimizer"])
+    ai_tabs = st.tabs(["RAG Knowledge Base", "Data Assistant", "Report Summary", "Offset Advisor", "Regulation Radar", "Emission Optimizer"])
     
     with ai_tabs[0]:
+        st.markdown("<h3>📚 RAG Knowledge Base Query</h3>", unsafe_allow_html=True)
+        st.markdown("Ask questions about carbon accounting, regulations, reduction strategies, and offset markets. Powered by our comprehensive knowledge base.")
+        
+        # Initialize RAG system
+        from rag_system import get_rag_system
+        
+        if 'rag_system' not in st.session_state:
+            with st.spinner("Initializing RAG knowledge base..."):
+                try:
+                    st.session_state.rag_system = get_rag_system()
+                    st.session_state.rag_system.load_vector_store()
+                    st.success("✅ Knowledge base loaded successfully!")
+                except Exception as e:
+                    st.error(f"Error initializing RAG system: {str(e)}")
+                    st.session_state.rag_system = None
+        
+        # Query interface
+        query = st.text_area("Ask a question about carbon accounting", 
+                            placeholder="Example: What are the differences between Scope 1, 2, and 3 emissions?\nWhat regulations apply to companies exporting to the EU?\nWhat are the best strategies to reduce manufacturing emissions?",
+                            height=100)
+        
+        col1, col2 = st.columns([1, 4])
+        with col1:
+            search_only = st.checkbox("Search only (faster)", value=False)
+        
+        if st.button("Get Answer", key="rag_query_btn"):
+            if query and st.session_state.rag_system:
+                with st.spinner("Searching knowledge base..."):
+                    try:
+                        if search_only:
+                            # Just retrieve relevant documents
+                            docs = st.session_state.rag_system.retrieve_context(query, k=4)
+                            st.markdown("### 📄 Relevant Information:")
+                            for i, doc in enumerate(docs, 1):
+                                with st.expander(f"Source {i}"):
+                                    st.markdown(doc.page_content)
+                        else:
+                            # Full RAG query with LLM
+                            result = st.session_state.rag_system.query(query)
+                            st.markdown("### 💡 Answer:")
+                            st.markdown(f"<div class='stCard'>{result['answer']}</div>", unsafe_allow_html=True)
+                            
+                            # Show sources
+                            if result['source_documents']:
+                                st.markdown("### 📚 Sources:")
+                                for i, doc in enumerate(result['source_documents'], 1):
+                                    with st.expander(f"Source {i}"):
+                                        st.markdown(doc.page_content)
+                    except Exception as e:
+                        st.error(f"Error: {str(e)}")
+            elif not query:
+                st.warning("Please enter a question.")
+            else:
+                st.error("RAG system not initialized. Please refresh the page.")
+    
+    with ai_tabs[1]:
         st.markdown("<h3>Data Entry Assistant</h3>", unsafe_allow_html=True)
         st.markdown("Get help with classifying emissions and mapping them to the correct scope.")
         

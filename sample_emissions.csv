@@ -1,0 +1,26 @@
+date,business_unit,project,scope,category,activity,country,facility,responsible_person,quantity,unit,emission_factor,emissions_kgCO2e,data_quality,verification_status,notes
+2024-01-15,Operations,Energy Efficiency,Scope 1,Stationary Combustion,Natural Gas Heating,India,Mumbai Office,Rajesh Kumar,5000,m3,2.0,10000.0,High,Internally Verified,Monthly natural gas consumption for office heating
+2024-01-15,Manufacturing,Production Line A,Scope 1,Mobile Combustion,Company Vehicles - Diesel,India,Pune Factory,Priya Sharma,800,liters,2.68,2144.0,High,Internally Verified,Diesel for delivery trucks and forklifts
+2024-01-20,Operations,Sustainability Initiative,Scope 2,Electricity,Office Electricity,India,Mumbai Office,Rajesh Kumar,15000,kWh,0.82,12300.0,High,Third-party Verified,Monthly electricity bill - grid power
+2024-01-22,Manufacturing,Production Line A,Scope 2,Electricity,Manufacturing Electricity,India,Pune Factory,Amit Patel,45000,kWh,0.82,36900.0,High,Third-party Verified,Factory electricity consumption
+2024-01-25,Logistics,Distribution,Scope 3,Upstream Transportation,Freight - Road Transport,India,Delhi Warehouse,Neha Singh,2000,ton-km,0.12,240.0,Medium,Not Verified,Raw material transportation from suppliers
+2024-02-01,Operations,Business Travel,Scope 3,Business Travel,Air Travel - Domestic,India,Mumbai Office,Vikram Reddy,5000,km,0.18,900.0,Medium,Internally Verified,Employee business trips - Mumbai to Bangalore
+2024-02-05,Manufacturing,Production Line B,Scope 1,Process Emissions,Industrial Process,India,Pune Factory,Amit Patel,1000,kg,1.5,1500.0,High,Third-party Verified,CO2 emissions from chemical reactions
+2024-02-10,Operations,Facilities Management,Scope 1,Fugitive Emissions,Refrigerant Leakage,India,Mumbai Office,Rajesh Kumar,5,kg,1430,7150.0,Medium,Internally Verified,HFC refrigerant leakage from AC systems
+2024-02-15,IT Department,Data Center,Scope 2,Electricity,Data Center Power,India,Bangalore DC,Sanjay Gupta,8000,kWh,0.82,6560.0,High,Third-party Verified,Monthly data center electricity
+2024-02-20,Logistics,Supply Chain,Scope 3,Downstream Transportation,Product Delivery,India,Multiple,Neha Singh,3500,ton-km,0.12,420.0,Medium,Not Verified,Product delivery to customers
+2024-03-01,Operations,Employee Commute,Scope 3,Employee Commuting,Daily Commute,India,Mumbai Office,HR Department,25000,km,0.15,3750.0,Low,Not Verified,Estimated employee commuting emissions
+2024-03-05,Manufacturing,Waste Management,Scope 3,Waste Generated,Industrial Waste,India,Pune Factory,Amit Patel,500,kg,0.5,250.0,Medium,Internally Verified,Waste sent to landfill
+2024-03-10,Operations,Backup Power,Scope 1,Stationary Combustion,Diesel Generators,India,Mumbai Office,Rajesh Kumar,200,liters,2.68,536.0,High,Internally Verified,Emergency backup generator usage
+2024-03-15,Logistics,Fleet Operations,Scope 1,Mobile Combustion,Company Vehicles - Petrol,India,Delhi Warehouse,Neha Singh,300,liters,2.31,693.0,High,Internally Verified,Petrol for company cars
+2024-03-20,Manufacturing,Production Line A,Scope 2,Steam,Purchased Steam,India,Pune Factory,Amit Patel,10000,kg,0.3,3000.0,High,Third-party Verified,Steam purchased for industrial processes
+2024-04-01,Operations,Office Operations,Scope 2,Electricity,Office Electricity,India,Bangalore Office,Sanjay Gupta,12000,kWh,0.82,9840.0,High,Third-party Verified,Monthly electricity consumption
+2024-04-05,Logistics,International Shipping,Scope 3,Upstream Transportation,Sea Freight,India,Mumbai Port,Neha Singh,50000,ton-km,0.01,500.0,Medium,Not Verified,Raw material imports via sea freight
+2024-04-10,Manufacturing,Production Line B,Scope 1,Stationary Combustion,LPG Usage,India,Pune Factory,Amit Patel,1000,kg,3.0,3000.0,High,Internally Verified,LPG for heating processes
+2024-04-15,Operations,Business Travel,Scope 3,Business Travel,Air Travel - International,India,Mumbai Office,Vikram Reddy,8000,km,0.25,2000.0,Medium,Internally Verified,International business trip to Singapore
+2024-04-20,IT Department,Cloud Services,Scope 3,Purchased Services,Cloud Computing,India,Bangalore DC,Sanjay Gupta,5000,kWh,0.5,2500.0,Low,Not Verified,Estimated emissions from cloud service providers
+2024-05-01,Manufacturing,Production Line A,Scope 1,Mobile Combustion,Forklifts - Diesel,India,Pune Factory,Amit Patel,400,liters,2.68,1072.0,High,Internally Verified,Diesel for material handling equipment
+2024-05-05,Operations,Renewable Energy,Scope 2,Electricity,Grid Electricity,India,Mumbai Office,Rajesh Kumar,10000,kWh,0.82,8200.0,High,Third-party Verified,Office electricity - partially offset by solar
+2024-05-10,Logistics,Last Mile Delivery,Scope 3,Downstream Transportation,Courier Services,India,Multiple,Neha Singh,1000,packages,0.5,500.0,Low,Not Verified,Third-party courier emissions estimate
+2024-05-15,Manufacturing,Quality Control,Scope 2,Electricity,Lab Equipment,India,Pune Factory,Dr. Meera Shah,3000,kWh,0.82,2460.0,High,Internally Verified,Laboratory and testing equipment power
+2024-05-20,Operations,Cafeteria,Scope 3,Purchased Goods,Food Services,India,Mumbai Office,Facilities Team,2000,meals,1.5,3000.0,Low,Not Verified,Estimated emissions from employee meals

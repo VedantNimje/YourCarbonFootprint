@@ -1,0 +1,103 @@
+GHG Protocol - Greenhouse Gas Emission Scopes
+
+SCOPE 1: DIRECT EMISSIONS
+Scope 1 emissions are direct greenhouse gas emissions that occur from sources that are controlled or owned by an organization. These include:
+
+1. Stationary Combustion:
+   - Emissions from fuel combustion in boilers, furnaces, burners, turbines, heaters, incinerators, engines, and flares
+   - Common fuels: natural gas, diesel, fuel oil, coal, propane, gasoline
+   - Formula: Fuel consumed (liters or kg) × Emission factor (kgCO2e/liter or kg)
+
+2. Mobile Combustion:
+   - Emissions from transportation owned or controlled by the organization
+   - Company vehicles, trucks, aircraft, ships, trains
+   - Formula: Distance traveled (km) × Emission factor (kgCO2e/km) OR Fuel consumed × Emission factor
+
+3. Process Emissions:
+   - Emissions from physical or chemical processing
+   - Examples: cement production, aluminum smelting, chemical manufacturing
+   - Emissions from industrial processes that chemically or physically transform materials
+
+4. Fugitive Emissions:
+   - Intentional or unintentional releases of GHGs
+   - Examples: refrigerant leakage from air conditioning, methane leakage from natural gas systems
+   - HFC, PFC, SF6 emissions from equipment
+
+SCOPE 2: INDIRECT EMISSIONS FROM PURCHASED ENERGY
+Scope 2 emissions are indirect GHG emissions from the consumption of purchased electricity, steam, heat, or cooling. Key points:
+
+1. Purchased Electricity:
+   - Emissions from electricity consumed by the organization
+   - Formula: Electricity consumed (kWh) × Grid emission factor (kgCO2e/kWh)
+   - Location-based method: Uses average emission factor for the grid
+   - Market-based method: Uses emission factor from specific supplier or renewable energy certificates
+
+2. Purchased Heat and Steam:
+   - Emissions from purchased thermal energy
+   - District heating systems, purchased steam for industrial processes
+
+3. Purchased Cooling:
+   - Emissions from purchased chilled water or cooling services
+   - District cooling systems
+
+Important Notes:
+- Scope 2 emissions physically occur at the facility where electricity/energy is generated
+- Organizations only account for energy they purchase and consume
+- Renewable energy purchases can reduce Scope 2 emissions under market-based accounting
+
+SCOPE 3: OTHER INDIRECT EMISSIONS
+Scope 3 includes all other indirect emissions that occur in the value chain. There are 15 categories:
+
+Upstream Categories:
+1. Purchased Goods and Services: Emissions from production of goods/services purchased
+2. Capital Goods: Emissions from production of capital goods (equipment, buildings, vehicles)
+3. Fuel and Energy Related Activities: Emissions from extraction, production, and transportation of fuels and energy
+4. Upstream Transportation and Distribution: Transportation and distribution of purchased products
+5. Waste Generated in Operations: Disposal and treatment of waste generated
+6. Business Travel: Employee travel for business purposes (not in company-owned vehicles)
+7. Employee Commuting: Emissions from employee commuting
+8. Upstream Leased Assets: Operation of assets leased by the reporting company
+
+Downstream Categories:
+9. Downstream Transportation and Distribution: Transportation and distribution of sold products
+10. Processing of Sold Products: Processing of intermediate products by third parties
+11. Use of Sold Products: End-use of goods and services sold
+12. End-of-Life Treatment of Sold Products: Disposal and treatment of products at end of life
+13. Downstream Leased Assets: Operation of assets owned and leased to others
+14. Franchises: Operation of franchises
+15. Investments: Operation of investments (equity, debt, project finance)
+
+Scope 3 Calculation Approaches:
+- Spend-based method: Expenditure × Emission factor
+- Activity-based method: Activity data × Emission factor
+- Average-data method: Industry averages or proxy data
+- Supplier-specific method: Data from specific suppliers
+
+EMISSION FACTORS
+Emission factors convert activity data into GHG emissions. Sources include:
+- IPCC (Intergovernmental Panel on Climate Change)
+- National GHG inventories
+- EPA (Environmental Protection Agency)
+- DEFRA (UK Department for Environment, Food & Rural Affairs)
+- IEA (International Energy Agency)
+- Industry-specific databases
+
+Common Emission Factors:
+- Natural Gas: ~2.0 kgCO2e/m³ or ~0.2 kgCO2e/kWh
+- Diesel: ~2.7 kgCO2e/liter
+- Gasoline: ~2.3 kgCO2e/liter
+- Electricity (varies by grid): 0.2-1.0 kgCO2e/kWh
+- Air Travel: 0.15-0.25 kgCO2e/km (varies by class and distance)
+
+ORGANIZATIONAL BOUNDARIES
+Organizations must define boundaries using one of these approaches:
+1. Equity Share: Account for emissions based on ownership percentage
+2. Financial Control: Account for emissions from operations with financial control
+3. Operational Control: Account for emissions from operations with operational control
+
+REPORTING REQUIREMENTS
+- Report Scope 1 and Scope 2 separately
+- Scope 3 reporting is optional but recommended
+- Use consistent methodology year-over-year
+- Document assumptions, emission factors, and calculation methods
+- Report in metric tons of CO2 equivalent (tCO2e)
