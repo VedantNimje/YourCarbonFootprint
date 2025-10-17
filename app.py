@@ -672,7 +672,7 @@ with st.sidebar:
     
     # Footer
     st.markdown(
-        "<div class='footer' style='color: #555555;'> 2025 YourCarbonFootprint<br>Product Owner: Sonu Kumar<br>sonu@aianytime.net</div>",
+        "<div class='footer' style='color: #555555;'> 2025 YourCarbonFootprint<br>Product Owner: Vedant Nimje<br>vedantnimje14@gmail.com</div>",
         unsafe_allow_html=True
     )
 

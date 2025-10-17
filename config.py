@@ -12,8 +12,8 @@ load_dotenv()
 APP_NAME = "YourCarbonFootprint"
 APP_VERSION = "1.0.0"
 APP_DESCRIPTION = "A lightweight, multilingual carbon accounting and reporting tool for SMEs in Asia"
-APP_AUTHOR = "Sonu Kumar"
-APP_CONTACT = "sonu@aianytime.net"
+APP_AUTHOR = "Vedant Nimje"
+APP_CONTACT = "vedantnimje14@gmail.com"
 
 # API keys
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
