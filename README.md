@@ -60,7 +60,7 @@ A lightweight, multilingual carbon accounting and reporting tool for SMEs in Asi
 │  │  - Settings             │  │       │  └─────────────────────┘  │
 │  └─────────────────────────┘  │       │                           │
 │                               │       │  ┌─────────────────────┐  │
-│  ┌─────────────────────────┐  │       │  │  AI Agent System    │  │
+│  ┌─────────────────────────┐  │       │  │  Agentic RAG        │  │
 │  │   Data Entry Module     │  │       │  │  - CrewAI Framework │  │
 │  │  - Enterprise Form      │◄─┼───────┼──┤  - Groq LLM         │  │
 │  │  - Validation           │  │       │  │  - Specialized      │  │
@@ -296,4 +296,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ---
 
-Built by AI Anytime with ❤️ for a sustainable future
+Built by Vedant Nimje with ❤️ for a sustainable future
